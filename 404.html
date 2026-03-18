@@ -1,1 +1,27 @@
-<meta http-equiv="refresh" content="0;url=/wiki/" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        // 1. 取得當前出錯的完整網址
+        var currentUrl = window.location.href;
+        var currentPath = window.location.pathname;
+
+        // 2. 判斷是否包含舊的路徑關鍵字 "/docs/"
+        if (currentPath.indexOf('/docs/') !== -1) {
+            // 3. 將路徑中的 /docs/ 替換為 /wiki/
+            // 使用 replace 會保留後續的所有檔案名稱與參數 (?id=xxx)
+            var newUrl = currentUrl.replace('/docs/', '/wiki/');
+            
+            // 4. 執行立即跳轉
+            window.location.replace(newUrl);
+        } else {
+            setTimeout(function() {
+                window.location.href = "/wiki/";
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
