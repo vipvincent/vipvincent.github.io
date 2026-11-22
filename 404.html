@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirect...</title>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redirecting...</title>
+        <script>
+            (function () {
+                var siteMain = "https://vipvincent.com";
+                var siteDocs = "https://docs.vipvincent.com";
 
-  <script>
-    const pathname = window.location.pathname;
-    const match = pathname.match(/^\/(?:wiki|docs)(?:\/(.*))?$/);
+                var pathname = window.location.pathname || "/";
+                var search = window.location.search || "";
+                var hash = window.location.hash || "";
 
-    if (match) {
-      const path = match[1] ? `/${match[1]}` : '/';
+                var match = pathname.match(/^\/(?:docs|wiki)(.*)$/);
 
-      window.location.replace(
-        'https://vipvincent-docs.pages.dev' +
-        path +
-        window.location.search +
-        window.location.hash
-      );
-    }
-  </script>
-</head>
-<body>
-  <p>Redirect...</p>
-</body>
+                if (match) {
+                    var rest = match[1] || "/";
+                    if (!rest.startsWith("/")) {
+                    rest = "/" + rest;
+                    }
+                    var targetUrl = siteDocs + rest + search + hash;
+                    window.location.replace(targetUrl);
+                    } else {
+                    window.location.replace(siteMain + "/");
+                }
+            })();
+        </script>
+    </head>
+    <body>
+        <p>Redirecting...</p>
+        <noscript>
+            <p>Your browser has JavaScript disabled. Please visit <a href="https://vipvincent.com/">vipvincent.com</a> manually.</p>
+        </noscript>
+    </body>
 </html>
